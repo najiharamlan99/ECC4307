@@ -1,0 +1,249 @@
+task main()
+{
+     int btn, startbtn, distance1, distance2, distance3 = 0;
+
+     int angle1 = 180;
+
+     while(startbtn == 0){
+     TextOut(0, LCD_LINE1, "ENTER Angle 1: ", 0);
+     NumOut(0, LCD_LINE2, angle1);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      angle1 = angle1 + 1;
+      NumOut(0, LCD_LINE2, angle1);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(angle1 == 0){
+      angle1 = 0;
+      }
+      else{
+      angle1 = angle1 - 1;
+      }
+      NumOut(0, LCD_LINE2, angle1);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     while(startbtn == 1){
+     TextOut(0, LCD_LINE4, "ENTER Distance 1: ", 0);
+     NumOut(0, LCD_LINE5, distance1);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      distance1 = distance1 + 1;
+      NumOut(0, LCD_LINE5, distance1);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(distance1 == 0){
+      distance1 = 0;
+      }
+      else{
+      distance1 = distance1 - 1;
+      }
+      NumOut(0, LCD_LINE5, distance1);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     ClearScreen();
+     int angle2 = 180;
+     while(startbtn == 2){
+     TextOut(0, LCD_LINE1, "ENTER Angle 2: ", 0);
+     NumOut(0, LCD_LINE2, angle2);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      angle2 = angle2 + 1;
+      NumOut(0, LCD_LINE2, angle2);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(angle2 == 0){
+      angle2 = 0;
+      }
+      else{
+      angle2 = angle2 - 1;
+      }
+      NumOut(0, LCD_LINE2, angle2);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     while(startbtn == 3){
+     TextOut(0, LCD_LINE4, "ENTER Distance 2: ", 0);
+     NumOut(0, LCD_LINE5, distance2);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      distance2 = distance2 + 1;
+      NumOut(0, LCD_LINE5, distance2);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(distance2 == 0){
+      distance2 = 0;
+      }
+      else{
+      distance2 = distance2 - 1;
+      }
+      NumOut(0, LCD_LINE5, distance2);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     ClearScreen();
+     
+     int angle3 = 180;
+     
+     while(startbtn == 4){
+     TextOut(0, LCD_LINE1, "ENTER Angle 3: ", 0);
+     NumOut(0, LCD_LINE2, angle3);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      angle3 = angle3 + 1;
+      NumOut(0, LCD_LINE2, angle3);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(angle3 == 0){
+      angle3 = 0;
+      }
+      else{
+      angle3 = angle3 - 1;
+      }
+      NumOut(0, LCD_LINE2, angle3);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     while(startbtn == 5){
+     TextOut(0, LCD_LINE4, "ENTER Distance 3: ", 0);
+     NumOut(0, LCD_LINE5, distance3);
+     if(ButtonPressed(BTNRIGHT, 0)){
+     btn = 1;
+     Wait(500);
+     }
+     if(ButtonPressed(BTNLEFT, 0)){
+     btn = 2;
+     Wait(500);
+     }
+     if(btn == 1){
+      distance3 = distance3 + 1;
+      NumOut(0, LCD_LINE5, distance3);
+      btn = 0;
+     }
+     if(btn == 2){
+      if(distance3 == 0){
+      distance3 = 0;
+      }
+      else{
+      distance3 = distance3 - 1;
+      }
+      NumOut(0, LCD_LINE5, distance3);
+      btn = 0;
+     }
+
+     if(ButtonPressed(BTNCENTER, 0)){
+     startbtn = startbtn + 1;
+     Wait(500);
+     }
+     }
+
+     ClearScreen();
+     
+     TextOut(0, LCD_LINE1, "Angle 1: ", 0);
+     NumOut(60, LCD_LINE1, angle1);
+     TextOut(0, LCD_LINE2, "Distance 1: ", 0);
+     NumOut(70, LCD_LINE2, distance1);
+     
+     TextOut(0, LCD_LINE4, "Angle 2: ", 0);
+     NumOut(60, LCD_LINE4, angle2);
+     TextOut(0, LCD_LINE5, "Distance 2: ", 0);
+     NumOut(70, LCD_LINE5, distance2);
+     
+     TextOut(0, LCD_LINE7, "Angle 3: ", 0);
+     NumOut(60, LCD_LINE7, angle3);
+     TextOut(0, LCD_LINE8, "Distance 3: ", 0);
+     NumOut(70, LCD_LINE8, distance3);
+     
+     while(startbtn == 6){
+     Wait(1000);
+     RotateMotorEx(OUT_AB, 75, angle1*2, 100, true, true);
+     Wait(1000);
+     RotateMotor(OUT_AB, 75, (360*distance1/19.04) );
+     Wait(1000);
+     RotateMotorEx(OUT_AB, 75, angle2*2, 100, true, true);
+     Wait(1000);
+     RotateMotor(OUT_AB, 75, (360*distance2/19.04) );
+     Wait(1000);
+     RotateMotorEx(OUT_AB, 75, angle3*2, 100, true, true);
+     Wait(1000);
+     RotateMotor(OUT_AB, 75, (360*distance3/19.04) );
+     Wait(1000);
+     }
+     
+     
+     
+     while(!(ButtonPressed(BTNEXIT, 0)) );
+
+
+}
