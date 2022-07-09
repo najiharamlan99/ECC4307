@@ -1,0 +1,82 @@
+#include <ev3.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
+#define EV3SENSOR_H
+#define NEAR 30
+
+
+task main()
+{
+
+int chosenexit=0;
+
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Exit*");
+
+while(!ButtonPressed(BTNCENTER,1))
+{
+if(ButtonPressed(BTNRIGHT,1))
+{
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Exit*");
+chosenexit=chosenexit+chosenexit;
+Wait(300);
+NumOut(41,LCD_LINE6,chosenexit);
+}
+
+if(ButtonPressed(BTNLEFT,1))
+{
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Chosen Exit*");
+chosenexit=chosenexit-chosenexit;
+Wait(300);
+NumOut(41,LCD_LINE6,chosenexit);
+}
+
+}
+until(!ButtonPressed(BTNCENTER,1));
+
+int counter=0;
+int firstexit=0;
+int secondexit=0;
+int thirdexit=0;
+bool prevhigh=false;
+SetSensorLowspeed(IN_1);
+while(counter<20)
+{
+//---------------------
+counter=counter+1;
+RotateMotor(OUT_AB, 50,212.00);
+if(SensorUS(IN_1)< NEAR)
+{prevhigh=false;
+}
+if(prevhigh==false && SensorUS(IN_1)> NEAR){
+if(SensorUS(IN_1)> NEAR && firstexit==0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+firstexit=counter;
+}
+if(SensorUS(IN_1)> NEAR && firstexit!=0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+secondexit=counter;
+}
+if(SensorUS(IN_1)> NEAR && firstexit!=0 && secondexit!=0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+thirdexit=counter;
+}
+prevhigh=true;
+}
+//---------------------
+}
+Off(OUT_AB);
+if(chosenexit==1){RotateMotor(OUT_AB, 50,-212.00*(19-firstexit));}
+if(chosenexit==2){RotateMotor(OUT_AB, 50,-212.00*(19-secondexit));}
+if(chosenexit==3){RotateMotor(OUT_AB, 50,-212.00*(19-thirdexit));}
+
+RotateMotorEx(OUT_AB, 50, 180, -100, true, true);
+OnFwd(OUT_AB,75);
+Wait(5000);
+}
