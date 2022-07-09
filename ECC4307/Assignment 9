@@ -1,38 +1,79 @@
-#define THRESHOLD 55
-#define NEAR 45
-task main()
+#include <ev3.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
+#define EV3SENSOR_H
+#define THRESHOLD_LIGHT 15 //light sensor threshold 15 percent
+#define THRESHOLD_SONAR 40 //sonar sensor threshold 40cm
 
+//rotate factor variable
+float rf = 2.75; //rotation in place factor
+float mf = 21; //rotation to move forward factor
+
+//declare counter, increment
+int i;
+int a;
+int b;
+
+
+char str[20];
+int r;
+
+//function to push object
+void pushObject()
 {
+	while(1)
+	{
+		if (ReadSensor(IN_1) < THRESHOLD_LIGHT)
+		{
+			Off(OUT_BC);
+			break;
+		}
 
- SetSensorLight(IN_1);
- SetSensorLowspeed(IN_4);
- OnFwd(OUT_AB, 90);
+		else
+		{
+			OnFwdEx(OUT_BC, 90,	true);
+		}
+	}
+}
 
- while (true)
+int main()
+{
+	InitEV3();
+	setAllSensorMode(COL_REFLECT, NO_SEN, NO_SEN, US_DIST_CM);
 
- {
+	while(1)
+	{
+		if (ButtonIsDown(BTNCENTER) == 1)
+		{
+			return;
+			Off(OUT_BC);
+			break;
+		}
 
- if (Sensor(IN_1) < THRESHOLD )
+		else
+		{
+			while(1)
+			{
+				for(i=1;i<=30;i++)
+				{
+					if(ReadSensor(IN_4) > THRESHOLD_SONAR)
+					{
+						//rotate and find
+						RotateMotorEx(OUT_BC, -50, 15, 200 , true, true);
+					}
 
- {
-
- Off(OUT_AB);
- Wait(1000);
- RotateMotor(OUT_AB, 50,-111.52);
-
- }
-
- if (Sensor(IN_1) > THRESHOLD && SensorUS(IN_4) > NEAR )
-
- {
- Wait(1000);
- OnFwd(OUT_A, 40);
- OnFwd(OUT_B, -40);
- until(SensorUS(IN_4)< NEAR );
- }
-  OnFwd(OUT_AB, 90);
-
- }
-
-
+					else
+					{
+						pushObject();
+						RotateMotorEx(OUT_BC, -70, 460, 0 , true, true);
+					}
+				}
+				pushObject();
+				break;
+			}
+		}
+	}
+	FreeEV3();
+	return 0;
 }
